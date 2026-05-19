@@ -25,6 +25,8 @@
   object-fit: contain;
   background: transparent;
   z-index: 1;
+  -webkit-mask-image: radial-gradient(ellipse 88% 92% at 50% 50%, black 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse 88% 92% at 50% 50%, black 55%, transparent 100%);
 }
 
 .video-overlay-ui {
