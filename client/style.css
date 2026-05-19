@@ -53,11 +53,13 @@
   pointer-events: none;
 }
 
-.idle-ring.visible { opacity: 1; }
+.idle-ring.visible {
+  opacity: 1;
+}
 
 .idle-ring svg circle.track {
   fill: none;
-  stroke: rgba(255,255,255,0.15);
+  stroke: rgba(255, 255, 255, 0.15);
   stroke-width: 4;
 }
 
@@ -99,7 +101,7 @@
   background-image:
     radial-gradient(circle at 15% 25%, rgba(124, 58, 237, 0.09) 0%, transparent 40%),
     radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 50% 5%,  rgba(6, 182, 212, 0.06) 0%, transparent 35%);
+    radial-gradient(circle at 50% 5%, rgba(6, 182, 212, 0.06) 0%, transparent 35%);
   pointer-events: none;
 }
 
@@ -665,9 +667,19 @@ body {
 /* Selfie page logo */
 .selfie-logo {
   height: clamp(38px, 5.5vw, 64px);
-  width: auto;
+  width: 78%;
   object-fit: contain;
   margin-bottom: 20px;
+  filter: drop-shadow(0 4px 14px rgba(30, 80, 220, 0.2));
+  align-self: center;
+}
+
+/* Result screen logo */
+.result-logo {
+  height: clamp(38px, 5.5vw, 64px);
+  width: 78%;
+  object-fit: contain;
+  margin-bottom: 4px;
   filter: drop-shadow(0 4px 14px rgba(30, 80, 220, 0.2));
   align-self: center;
 }
@@ -679,7 +691,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   height: clamp(36px, 5vw, 60px);
-  width: auto;
+  width: 78%;
   object-fit: contain;
   filter: drop-shadow(0 4px 14px rgba(99, 102, 241, 0.25));
   z-index: 5;
@@ -701,14 +713,14 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.5), 0 0 0 3px rgba(124,58,237,0.15);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.5), 0 0 0 3px rgba(124, 58, 237, 0.15);
   animation: replayPulse 2.5s ease-in-out infinite;
   transition: transform 0.15s, box-shadow 0.2s;
 }
 
 .replay-video-btn:hover {
   transform: scale(1.1) translateY(-2px);
-  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.65), 0 0 0 5px rgba(124,58,237,0.2);
+  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.65), 0 0 0 5px rgba(124, 58, 237, 0.2);
 }
 
 .replay-video-btn:active {
@@ -716,8 +728,15 @@ body {
 }
 
 @keyframes replayPulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(124,58,237,0.5), 0 0 0 3px rgba(124,58,237,0.15); }
-  50%       { box-shadow: 0 4px 28px rgba(59,130,246,0.6), 0 0 0 6px rgba(59,130,246,0.1); }
+
+  0%,
+  100% {
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.5), 0 0 0 3px rgba(124, 58, 237, 0.15);
+  }
+
+  50% {
+    box-shadow: 0 4px 28px rgba(59, 130, 246, 0.6), 0 0 0 6px rgba(59, 130, 246, 0.1);
+  }
 }
 
 /* Responsive Selfie Page */
@@ -925,10 +944,23 @@ body {
 }
 
 @keyframes floatParticle {
-  0%   { opacity: 0; transform: translateY(0) scale(0.5); }
-  15%  { opacity: 0.7; }
-  85%  { opacity: 0.7; }
-  100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+
+  15% {
+    opacity: 0.7;
+  }
+
+  85% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(1.2);
+  }
 }
 
 /* Neural network line connectors */
@@ -941,8 +973,16 @@ body {
 }
 
 @keyframes neuralPulse {
-  0%, 100% { opacity: 0; }
-  40%, 60% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  40%,
+  60% {
+    opacity: 1;
+  }
 }
 
 /* AI chip grid dots overlay */
@@ -957,8 +997,15 @@ body {
 }
 
 @keyframes gridFade {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
 }
 
 .loader-ring-bg {
@@ -1011,10 +1058,13 @@ body {
 
 /* Wireframe pulse animation */
 @keyframes pulseScanGrid {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(0.96);
     filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.3));
   }
+
   50% {
     transform: scale(1.02);
     filter: drop-shadow(0 0 14px rgba(124, 58, 237, 0.5));
@@ -1039,12 +1089,15 @@ body {
     top: 15%;
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     top: 85%;
     opacity: 0;
@@ -1096,8 +1149,17 @@ body {
 }
 
 @keyframes dotBlink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(0.6); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.3;
+    transform: scale(0.6);
+  }
 }
 
 /* Parallax layer wrapper */
@@ -1145,8 +1207,15 @@ body {
 }
 
 @keyframes rippleExpand {
-  0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(18); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(18);
+    opacity: 0;
+  }
 }
 
 /* Typewriter cursor blink */
@@ -1159,8 +1228,15 @@ body {
 }
 
 @keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Progress steps */
@@ -1256,17 +1332,26 @@ body {
 }
 
 /* Fill connector line between done steps */
-.step-item.done + .step-connector::after {
+.step-item.done+.step-connector::after {
   left: 0;
 }
 
-.step-item.done + .step-connector {
+.step-item.done+.step-connector {
   background: rgba(34, 197, 94, 0.2);
 }
 
 @keyframes stepPulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(99, 102, 241, 0.35); transform: scale(1); }
-  50% { box-shadow: 0 0 18px rgba(99, 102, 241, 0.65); transform: scale(1.1); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.35);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 18px rgba(99, 102, 241, 0.65);
+    transform: scale(1.1);
+  }
 }
 
 @keyframes pulse-glow {
@@ -1671,12 +1756,27 @@ body {
     justify-content: center;
   }
 
-  .logo-wrap { margin-bottom: 6px; }
-  .logo-img  { height: clamp(36px, 5vh, 56px); width: auto; }
+  .logo-wrap {
+    margin-bottom: 6px;
+  }
 
-  .heading-wrap { margin-bottom: 10px; }
-  .vibe-text    { font-size: clamp(1.6rem, 4vw, 2.8rem); }
-  .choose-text  { font-size: 0.7rem; letter-spacing: 4px; }
+  .logo-img {
+    height: clamp(36px, 5vh, 56px);
+    width: auto;
+  }
+
+  .heading-wrap {
+    margin-bottom: 10px;
+  }
+
+  .vibe-text {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+  }
+
+  .choose-text {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+  }
 
   .cards-row {
     gap: clamp(8px, 1.5vw, 20px);
@@ -1696,7 +1796,11 @@ body {
 
 /* --- Index page: tablet portrait (2×2 grid) --- */
 @media (min-width: 701px) and (max-width: 1024px) and (orientation: portrait) {
-  html, body { overflow: auto; }
+
+  html,
+  body {
+    overflow: auto;
+  }
 
   .main-wrapper {
     height: auto;
@@ -1705,11 +1809,22 @@ body {
     justify-content: flex-start;
   }
 
-  .logo-wrap { margin-bottom: 12px; }
-  .logo-img  { height: clamp(48px, 7vw, 72px); width: 60%; }
+  .logo-wrap {
+    margin-bottom: 12px;
+  }
 
-  .heading-wrap { margin-bottom: 24px; }
-  .vibe-text    { font-size: clamp(2.8rem, 6vw, 4rem); }
+  .logo-img {
+    height: clamp(48px, 7vw, 72px);
+    width: 60%;
+  }
+
+  .heading-wrap {
+    margin-bottom: 24px;
+  }
+
+  .vibe-text {
+    font-size: clamp(2.8rem, 6vw, 4rem);
+  }
 
   .cards-row {
     flex-wrap: wrap;
@@ -1724,10 +1839,21 @@ body {
     max-width: 260px;
   }
 
-  .vibe-card:nth-child(1) { --base-rot: 12deg; }
-  .vibe-card:nth-child(2) { --base-rot: -12deg; }
-  .vibe-card:nth-child(3) { --base-rot: 12deg; }
-  .vibe-card:nth-child(4) { --base-rot: -12deg; }
+  .vibe-card:nth-child(1) {
+    --base-rot: 12deg;
+  }
+
+  .vibe-card:nth-child(2) {
+    --base-rot: -12deg;
+  }
+
+  .vibe-card:nth-child(3) {
+    --base-rot: 12deg;
+  }
+
+  .vibe-card:nth-child(4) {
+    --base-rot: -12deg;
+  }
 
   .icon-platform {
     width: clamp(52px, 8vw, 76px);
@@ -1754,8 +1880,13 @@ body {
     max-width: 280px;
   }
 
-  .selfie-heading    { font-size: clamp(1.4rem, 3.5vw, 2rem); }
-  .take-your         { font-size: 0.7rem; }
+  .selfie-heading {
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+  }
+
+  .take-your {
+    font-size: 0.7rem;
+  }
 }
 
 /* --- Selfie page: tablet portrait --- */
@@ -1822,11 +1953,14 @@ body {
     margin-top: 24px;
   }
 
-  .step-connector { width: 40px; }
+  .step-connector {
+    width: 40px;
+  }
 }
 
 /* --- Modal: tablet --- */
 @media (min-width: 701px) and (max-width: 1024px) {
+
   .modal-content,
   .lead-modal-content {
     max-width: 460px;
