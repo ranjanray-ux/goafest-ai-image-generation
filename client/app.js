@@ -19,79 +19,35 @@ const introVideo    = document.getElementById('intro-video');
 const experienceBtn = document.getElementById('experience-btn');
 const mainContent   = document.getElementById('main-content');
 
-let idleTimer       = null;
-const IDLE_TIMEOUT  = 60000; // 1 minute
-
-// --- Idle countdown ring ---
-const ring = document.createElement('div');
-ring.className = 'idle-ring';
-ring.innerHTML = `<svg viewBox="0 0 52 52" width="52" height="52">
-  <circle class="track" cx="26" cy="26" r="22"/>
-  <circle class="fill"  cx="26" cy="26" r="22" id="ring-fill"/>
-</svg>`;
-document.body.appendChild(ring);
-const ringFill = document.getElementById('ring-fill');
-const CIRCUMFERENCE = 2 * Math.PI * 22; // ≈ 138.2
-
-function setRingProgress(fraction) {
-  ringFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - fraction);
-}
-
 // --- Show main content, hide video ---
 function showMainContent() {
   videoOverlay.classList.add('hidden');
   mainContent.classList.add('visible');
   setTimeout(() => videoOverlay.style.display = 'none', 700);
-  resetIdleTimer();
 }
 
-// --- Return to video from saved position ---
-function returnToVideo() {
-  clearIdleUI();
+// --- Replay video ---
+function replayVideo() {
+  sessionStorage.setItem('goaVideoTime', 0);
+  introVideo.currentTime = 0;
   mainContent.classList.remove('visible');
   videoOverlay.style.display = 'flex';
   requestAnimationFrame(() => videoOverlay.classList.remove('hidden'));
   introVideo.play();
 }
 
-// --- Idle timer ---
-function resetIdleTimer() {
-  clearTimeout(idleTimer);
-  clearIdleUI();
-
-  let elapsed = 0;
-  ring.classList.add('visible');
-  setRingProgress(0);
-
-  const tick = setInterval(() => {
-    elapsed += 1000;
-    setRingProgress(elapsed / IDLE_TIMEOUT);
-    if (elapsed >= IDLE_TIMEOUT) {
-      clearInterval(tick);
-      returnToVideo();
-    }
-  }, 1000);
-
-  idleTimer = tick;
-}
-
-function clearIdleUI() {
-  clearTimeout(idleTimer);
-  clearInterval(idleTimer);
-  ring.classList.remove('visible');
-  setRingProgress(0);
-}
-
-// Reset timer on any interaction on the main page
-['mousemove', 'mousedown', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
-  document.addEventListener(evt, () => {
-    if (mainContent.classList.contains('visible')) resetIdleTimer();
-  }, { passive: true });
-});
+function clearIdleUI() {}
 
 // --- Experience button click ---
 experienceBtn.addEventListener('click', showMainContent);
 experienceBtn.addEventListener('touchend', (e) => { e.preventDefault(); showMainContent(); });
+
+// --- Replay button ---
+const replayBtn = document.getElementById('replay-video-btn');
+if (replayBtn) {
+  replayBtn.addEventListener('click', replayVideo);
+  replayBtn.addEventListener('touchend', (e) => { e.preventDefault(); replayVideo(); });
+}
 
 // --- Autoplay with sound fallback ---
 introVideo.play().catch(() => {

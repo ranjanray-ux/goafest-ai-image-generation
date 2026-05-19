@@ -672,14 +672,49 @@ body {
   align-self: center;
 }
 
-/* Loading screen logo */
-.loading-logo {
-  margin-top: 18px;
-  height: clamp(32px, 4vw, 52px);
+/* Loading screen logo — top center */
+.loading-logo-top {
+  position: absolute;
+  top: clamp(20px, 4vh, 40px);
+  left: 50%;
+  transform: translateX(-50%);
+  height: clamp(36px, 5vw, 60px);
   width: auto;
   object-fit: contain;
-  opacity: 0.85;
-  filter: drop-shadow(0 2px 10px rgba(99, 102, 241, 0.3));
+  filter: drop-shadow(0 4px 14px rgba(99, 102, 241, 0.25));
+  z-index: 5;
+}
+
+/* Replay video floating button */
+.replay-video-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 500;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.replay-video-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(99,102,241,0.3);
+}
+
+.replay-video-btn:active {
+  transform: scale(0.96);
 }
 
 /* Responsive Selfie Page */
