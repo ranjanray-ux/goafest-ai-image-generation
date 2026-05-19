@@ -1557,3 +1557,178 @@ body {
     width: 100%;
   }
 }
+
+/* ===== TABLET STYLES (768px – 1024px) ===== */
+
+/* --- Index page: tablet landscape (fits all 4 cards in one row) --- */
+@media (min-width: 701px) and (max-width: 1024px) and (orientation: landscape) {
+  .main-wrapper {
+    height: 100vh;
+    overflow: hidden;
+    padding: 12px 24px 0;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .logo-wrap { margin-bottom: 6px; }
+  .logo-img  { height: clamp(36px, 5vh, 56px); width: auto; }
+
+  .heading-wrap { margin-bottom: 10px; }
+  .vibe-text    { font-size: clamp(1.6rem, 4vw, 2.8rem); }
+  .choose-text  { font-size: 0.7rem; letter-spacing: 4px; }
+
+  .cards-row {
+    gap: clamp(8px, 1.5vw, 20px);
+    padding-bottom: 60px;
+  }
+
+  .vibe-card {
+    width: clamp(90px, 18vw, 175px);
+  }
+
+  .icon-platform {
+    width: clamp(40px, 6vw, 64px);
+    height: clamp(40px, 6vw, 64px);
+    bottom: -36px;
+  }
+}
+
+/* --- Index page: tablet portrait (2×2 grid) --- */
+@media (min-width: 701px) and (max-width: 1024px) and (orientation: portrait) {
+  html, body { overflow: auto; }
+
+  .main-wrapper {
+    height: auto;
+    min-height: 100vh;
+    padding: 36px 24px 40px;
+    justify-content: flex-start;
+  }
+
+  .logo-wrap { margin-bottom: 12px; }
+  .logo-img  { height: clamp(48px, 7vw, 72px); width: 60%; }
+
+  .heading-wrap { margin-bottom: 24px; }
+  .vibe-text    { font-size: clamp(2.8rem, 6vw, 4rem); }
+
+  .cards-row {
+    flex-wrap: wrap;
+    gap: 40px 24px;
+    justify-content: center;
+    padding-bottom: 80px;
+    max-width: 680px;
+  }
+
+  .vibe-card {
+    width: calc(50% - 24px);
+    max-width: 260px;
+  }
+
+  .vibe-card:nth-child(1) { --base-rot: 12deg; }
+  .vibe-card:nth-child(2) { --base-rot: -12deg; }
+  .vibe-card:nth-child(3) { --base-rot: 12deg; }
+  .vibe-card:nth-child(4) { --base-rot: -12deg; }
+
+  .icon-platform {
+    width: clamp(52px, 8vw, 76px);
+    height: clamp(52px, 8vw, 76px);
+    bottom: -42px;
+  }
+}
+
+/* --- Selfie page: tablet landscape --- */
+@media (min-width: 701px) and (max-width: 1024px) and (orientation: landscape) {
+  .selfie-wrapper {
+    flex-direction: row;
+    gap: clamp(24px, 4vw, 60px);
+    height: 100vh;
+    padding: 20px 32px;
+    overflow: hidden;
+  }
+
+  .webcam-box {
+    width: clamp(260px, 44vh, 420px);
+  }
+
+  .right-panel {
+    max-width: 280px;
+  }
+
+  .selfie-heading    { font-size: clamp(1.4rem, 3.5vw, 2rem); }
+  .take-your         { font-size: 0.7rem; }
+}
+
+/* --- Selfie page: tablet portrait --- */
+@media (min-width: 701px) and (max-width: 1024px) and (orientation: portrait) {
+  .selfie-wrapper {
+    flex-direction: column;
+    gap: 36px;
+    height: auto;
+    min-height: 100vh;
+    padding: 80px 40px 60px;
+    align-items: center;
+  }
+
+  .webcam-box {
+    width: min(72vw, 480px);
+  }
+
+  .right-panel {
+    width: min(72vw, 480px);
+    max-width: 480px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .camera-icon-wrap {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* --- Result screen: tablet --- */
+@media (min-width: 701px) and (max-width: 1024px) {
+  .result-overlay {
+    padding: 30px 24px;
+    overflow-y: auto;
+  }
+
+  .result-container-flex {
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+    max-width: 560px;
+  }
+
+  .result-card-wrap {
+    width: min(55vw, 340px);
+  }
+
+  .result-actions-col {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .action-btn-teal,
+  .action-btn-gradient {
+    font-size: 1rem;
+    padding: 16px 18px;
+  }
+}
+
+/* --- Loading screen: tablet --- */
+@media (min-width: 701px) and (max-width: 1024px) {
+  .loading-steps {
+    margin-top: 24px;
+  }
+
+  .step-connector { width: 40px; }
+}
+
+/* --- Modal: tablet --- */
+@media (min-width: 701px) and (max-width: 1024px) {
+  .modal-content,
+  .lead-modal-content {
+    max-width: 460px;
+    padding: 36px 32px;
+  }
+}
