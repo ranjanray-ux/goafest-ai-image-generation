@@ -25,8 +25,18 @@
   object-fit: contain;
   background: transparent;
   z-index: 1;
-  -webkit-mask-image: radial-gradient(ellipse 88% 92% at 50% 50%, black 55%, transparent 100%);
-  mask-image: radial-gradient(ellipse 88% 92% at 50% 50%, black 55%, transparent 100%);
+}
+
+.video-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  -webkit-mask-image: radial-gradient(ellipse 72% 82% at 50% 50%, transparent 58%, black 100%);
+  mask-image: radial-gradient(ellipse 72% 82% at 50% 50%, transparent 58%, black 100%);
+  pointer-events: none;
+  z-index: 3;
 }
 
 .video-overlay-ui {
