@@ -34,7 +34,7 @@ router.post('/', upload.single('image'), async (req, res, next) => {
         const mimeType = file.mimetype;
 
         // Dynamically find the reference image based on vibe
-        const vibeName = vibe.replace(/^THE /, ''); // e.g., "NIGHT ENERGY"
+        const vibeName = vibe.replace(/^THE /, '').replace(/\s+/g, ''); // e.g., "NIGHTENERGY"
         const referenceDir = path.join(__dirname, '../../reference');
         let referencePath = null;
 
