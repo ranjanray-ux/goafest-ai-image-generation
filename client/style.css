@@ -662,6 +662,25 @@ body {
   background-clip: text;
 }
 
+/* Selfie page logo */
+.selfie-logo {
+  height: clamp(40px, 6vw, 68px);
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 4px 14px rgba(30, 80, 220, 0.2));
+}
+
+/* Loading screen logo */
+.loading-logo {
+  margin-top: 18px;
+  height: clamp(32px, 4vw, 52px);
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 10px rgba(99, 102, 241, 0.3));
+}
+
 /* Responsive Selfie Page */
 @media (max-width: 900px) {
   .selfie-wrapper {
