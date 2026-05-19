@@ -1,3 +1,18 @@
+// ===== PAGE-LEVEL AI EFFECTS (cursor glow + parallax) =====
+(function initPageEffects() {
+  const glow  = document.getElementById('page-cursor-glow');
+  const layer = document.getElementById('page-parallax');
+
+  document.addEventListener('mousemove', (e) => {
+    if (glow) { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }
+    if (layer) {
+      const dx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      const dy = (e.clientY / window.innerHeight - 0.5) * 2;
+      layer.style.transform = `translate(${dx * 16}px, ${dy * 12}px)`;
+    }
+  });
+})();
+
 // ===== VIDEO INTRO + INACTIVITY LOGIC =====
 const videoOverlay  = document.getElementById('video-overlay');
 const introVideo    = document.getElementById('intro-video');

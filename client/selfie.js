@@ -120,6 +120,18 @@ function setLoadingStep(index) {
 
 document.addEventListener("DOMContentLoaded", () => {
   initLoadingInteractions();
+
+  // Page-level AI effects — cursor glow + parallax
+  const pageGlow  = document.getElementById('page-cursor-glow');
+  const pageLayer = document.getElementById('page-parallax');
+  document.addEventListener('mousemove', (e) => {
+    if (pageGlow)  { pageGlow.style.left = e.clientX + 'px'; pageGlow.style.top = e.clientY + 'px'; }
+    if (pageLayer) {
+      const dx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      const dy = (e.clientY / window.innerHeight - 0.5) * 2;
+      pageLayer.style.transform = `translate(${dx * 16}px, ${dy * 12}px)`;
+    }
+  }, { passive: true });
   const videoElement = document.getElementById("webcam");
   const captureBtn = document.getElementById("capture-btn");
   const retakeBtn = document.getElementById("retake-btn");
@@ -246,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Finalizing high-quality avatar..."
       ];
 
-      let msgIndex  = 0;
+      let msgIndex = 0;
       let stepIndex = 0;
       const loadingMsgEl = document.getElementById("loading-message");
 
@@ -255,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const intervalId = setInterval(() => {
         // Messages cycle for variety; steps only advance forward, never reset
-        msgIndex  = (msgIndex + 1) % loadingMessages.length;
+        msgIndex = (msgIndex + 1) % loadingMessages.length;
         stepIndex = Math.min(stepIndex + 1, loadingMessages.length - 1);
         setLoadingStep(stepIndex);
         if (loadingMsgEl) {
