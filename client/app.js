@@ -20,7 +20,7 @@ const experienceBtn = document.getElementById('experience-btn');
 const mainContent   = document.getElementById('main-content');
 
 let idleTimer       = null;
-const IDLE_TIMEOUT  = 10000; // 10 seconds
+const IDLE_TIMEOUT  = 60000; // 1 minute
 
 // --- Idle countdown ring ---
 const ring = document.createElement('div');
