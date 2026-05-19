@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediaKart — Take Your Selfie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div class="bg-layer bg2-layer"></div>
+
+  <!-- Back Button -->
+  <button class="back-btn" id="back-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    Back
+  </button>
+
+  <!-- Main Wrapper for Selfie Page -->
+  <main class="selfie-wrapper">
+
+    <!-- Left: Webcam Area -->
+    <div class="webcam-box">
+      <div class="bracket top-left"></div>
+      <div class="bracket top-right"></div>
+      <div class="bracket bottom-left"></div>
+      <div class="bracket bottom-right"></div>
+
+      <!-- Webcam Feed -->
+      <video id="webcam" autoplay playsinline></video>
+
+      <!-- Capture Button -->
+      <button class="capture-btn" id="capture-btn" aria-label="Take Selfie">
+        <svg viewBox="0 0 24 24" class="btn-cam-svg">
+          <defs>
+            <linearGradient id="btn-cam-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a855f7" />
+              <stop offset="100%" stop-color="#3b82f6" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M20 5h-3.17L15 3H9L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 14H4V7h16v12zM12 9c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"
+            fill="url(#btn-cam-grad)" />
+        </svg>
+      </button>
+
+      <!-- Action Buttons -->
+      <div class="action-btns" id="action-btns" style="display: none;">
+        <!-- Retake Button -->
+        <button class="retake-btn" id="retake-btn" aria-label="Retake Selfie">
+          <svg width="20" height="20" viewBox="0 0 24 24" class="btn-retake-svg" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+          Retake
+        </button>
+        <!-- Generate Button -->
+        <button class="generate-btn" id="generate-btn" aria-label="Generate Image">
+          Generate
+        </button>
+      </div>
+    </div>
+
+    <!-- Right: Text & Icon -->
+    <div class="selfie-text-col">
+      <div class="camera-icon-wrap">
+        <svg viewBox="0 0 24 24" class="cam-svg">
+          <defs>
+            <linearGradient id="cam-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a855f7" />
+              <stop offset="100%" stop-color="#3b82f6" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M20 5h-3.17L15 3H9L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 14H4V7h16v12zM12 9c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"
+            fill="url(#cam-grad)" />
+        </svg>
+      </div>
+
+      <p class="selfie-subtitle">POSITION YOUR FACE IN THE FRAME</p>
+
+      <div class="divider-line subtle-divider">
+        <span class="divider-dash"></span>
+        <span class="divider-diamond">✦</span>
+        <span class="divider-dash"></span>
+      </div>
+
+      <h1 class="take-your">TAKE YOUR</h1>
+      <h1 class="selfie-gradient">SELFIE</h1>
+
+      <div class="divider-line subtle-divider">
+        <span class="divider-dash"></span>
+        <span class="divider-diamond">✦</span>
+        <span class="divider-dash"></span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-overlay" style="display: none;">
+
+    <!-- Cursor-following glow orb -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <!-- Parallax particle layer (moves with mouse) -->
+    <div class="parallax-layer" id="parallax-layer">
+      <div class="ai-particle" style="width:8px;height:8px;background:#7c3aed;left:15%;top:70%;animation-duration:4.2s;animation-delay:0s;"></div>
+      <div class="ai-particle" style="width:5px;height:5px;background:#3b82f6;left:30%;top:75%;animation-duration:5s;animation-delay:0.8s;"></div>
+      <div class="ai-particle" style="width:7px;height:7px;background:#06b6d4;left:60%;top:80%;animation-duration:3.8s;animation-delay:1.4s;"></div>
+      <div class="ai-particle" style="width:6px;height:6px;background:#6366f1;left:75%;top:72%;animation-duration:4.6s;animation-delay:0.4s;"></div>
+      <div class="ai-particle" style="width:4px;height:4px;background:#a78bfa;left:85%;top:65%;animation-duration:5.2s;animation-delay:2s;"></div>
+      <div class="ai-particle" style="width:9px;height:9px;background:#7c3aed;left:5%;top:60%;animation-duration:4s;animation-delay:1.2s;"></div>
+      <div class="ai-particle" style="width:5px;height:5px;background:#3b82f6;left:45%;top:78%;animation-duration:4.8s;animation-delay:0.6s;"></div>
+      <div class="ai-particle" style="width:6px;height:6px;background:#06b6d4;left:90%;top:55%;animation-duration:3.5s;animation-delay:1.8s;"></div>
+    </div>
+
+    <!-- Neural network connector lines (static) -->
+    <div class="neural-line" style="width:120px;left:10%;top:35%;transform:rotate(25deg);animation-delay:0s;"></div>
+    <div class="neural-line" style="width:90px;left:70%;top:25%;transform:rotate(-18deg);animation-delay:1s;"></div>
+    <div class="neural-line" style="width:150px;left:20%;top:65%;transform:rotate(8deg);animation-delay:2s;"></div>
+    <div class="neural-line" style="width:80px;left:60%;top:60%;transform:rotate(-30deg);animation-delay:1.5s;"></div>
+
+    <div class="relative w-48 h-48 flex items-center justify-center mb-8"
+      style="position: relative; width: 192px; height: 192px;">
+      <div class="loader-ring-bg"></div>
+      <div class="loader-ring-active animate-spin-fast"></div>
+      <div class="loader-ring-reverse animate-spin-reverse"></div>
+      <div class="loader-center-text">
+        <svg class="scan-svg" viewBox="0 0 100 100">
+          <path d="M15 30 V15 H30" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M85 30 V15 H70" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M15 70 V85 H30" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M85 70 V85 H70" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+          <path class="wireframe-face" d="M50 25 C40 25 32 32 32 45 C32 58 42 68 50 75 C58 68 68 58 68 45 C68 32 60 25 50 25 Z" fill="none" stroke="rgba(124, 58, 237, 0.45)" stroke-width="2" stroke-dasharray="3 3"/>
+          <path class="wireframe-features" d="M42 42 H45 M55 42 H58 M46 54 Q50 58 54 54" fill="none" stroke="rgba(99, 102, 241, 0.8)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="50" cy="48" r="16" fill="none" stroke="rgba(59, 130, 246, 0.25)" stroke-width="1.5"/>
+          <circle cx="50" cy="20" r="2" fill="rgba(124,58,237,0.5)"/>
+          <circle cx="22" cy="40" r="1.5" fill="rgba(99,102,241,0.4)"/>
+          <circle cx="78" cy="40" r="1.5" fill="rgba(99,102,241,0.4)"/>
+          <circle cx="32" cy="72" r="1.5" fill="rgba(59,130,246,0.4)"/>
+          <circle cx="68" cy="72" r="1.5" fill="rgba(59,130,246,0.4)"/>
+          <line x1="50" y1="25" x2="50" y2="20" stroke="rgba(124,58,237,0.25)" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="32" y1="45" x2="22" y2="40" stroke="rgba(99,102,241,0.2)" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="68" y1="45" x2="78" y2="40" stroke="rgba(99,102,241,0.2)" stroke-width="1" stroke-dasharray="2 2"/>
+        </svg>
+        <div class="scanner-laser"></div>
+      </div>
+    </div>
+
+    <h2 id="loading-message" class="loading-text">Generating your avatar...<span class="type-cursor">|</span></h2>
+    <div class="loading-ai-label">AI Powered</div>
+
+    <!-- Progress steps -->
+    <div class="loading-steps">
+      <div class="step-item active" data-step="0">
+        <div class="step-dot"><svg viewBox="0 0 12 12" width="10" height="10"><polyline points="2,6 5,9 10,3" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="step-label">Analyze</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" data-step="1">
+        <div class="step-dot"><svg viewBox="0 0 12 12" width="10" height="10"><polyline points="2,6 5,9 10,3" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="step-label">Identify</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" data-step="2">
+        <div class="step-dot"><svg viewBox="0 0 12 12" width="10" height="10"><polyline points="2,6 5,9 10,3" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="step-label">Style</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" data-step="3">
+        <div class="step-dot"><svg viewBox="0 0 12 12" width="10" height="10"><polyline points="2,6 5,9 10,3" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="step-label">Render</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item" data-step="4">
+        <div class="step-dot"><svg viewBox="0 0 12 12" width="10" height="10"><polyline points="2,6 5,9 10,3" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="step-label">Finish</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Result Screen -->
+  <div id="result-screen" class="result-overlay" style="display: none;">
+    <div class="result-container-flex">
+      
+      <!-- Left side: The Card -->
+      <div class="result-card-wrap">
+        <div class="avatar-badge">YOUR AI AVATAR</div>
+        <img id="result-image" src="" alt="AI Generated Avatar">
+      </div>
+
+      <!-- Right side: Actions -->
+      <div class="result-actions-col">
+        <div class="action-buttons-row">
+          <!-- Scan QR Button -->
+          <button id="scan-qr-btn" class="action-btn-teal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="action-icon">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            Scan QR
+          </button>
+          
+          <!-- Print Button -->
+          <button id="print-btn" class="action-btn-teal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="action-icon">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print
+          </button>
+        </div>
+
+        <!-- Create Again Button -->
+        <button id="restart-btn" class="action-btn-gradient">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="action-icon animate-spin-hover">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+          </svg>
+          Create Again
+        </button>
+      </div>
+
+    </div>
+
+    <!-- QR Code Popup Modal -->
+    <div id="qr-modal" class="modal-overlay" style="display: none;">
+      <div class="modal-content">
+        <button id="close-modal-btn" class="close-modal">&times;</button>
+        <h3 class="modal-title">Scan to Download</h3>
+        <div id="qrcode-container"></div>
+        <p class="modal-text">Scan this QR code with your phone to save your custom AI avatar instantly!</p>
+      </div>
+    </div>
+
+    <!-- Lead Capture Popup Modal -->
+    <div id="lead-modal" class="modal-overlay" style="display: none;">
+      <div class="modal-content lead-modal-content">
+        <button id="close-lead-modal-btn" class="close-modal">&times;</button>
+        <h3 class="modal-title">Get Your Avatar</h3>
+        <p class="modal-subtext">Drop your details below to unlock your download QR code. Or just skip!</p>
+        
+        <form id="lead-form" class="lead-form-fields">
+          <input type="text" id="lead-name" placeholder="Full Name" required />
+          <input type="email" id="lead-email" placeholder="Email Address" required />
+          <input type="tel" id="lead-phone" placeholder="Phone Number" pattern="[0-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number." required />
+          <input type="text" id="lead-org" placeholder="Organization (Optional)" />
+          
+          <button type="submit" class="lead-submit-btn">Submit & Get QR</button>
+        </form>
+        
+        <button id="lead-skip-btn" class="lead-skip-btn">Skip</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="selfie.js"></script>
+</body>
+
+</html>
