@@ -15,11 +15,31 @@
 
 <body>
 
+  <!-- Video Intro Overlay -->
+  <div id="video-overlay" class="video-overlay">
+    <video id="intro-video" class="intro-video" autoplay muted playsinline>
+      <source src="video/intro.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay-ui">
+      <button id="experience-btn" class="experience-btn">
+        <span class="exp-touch-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 11V6a2 2 0 0 0-4 0v5"/>
+            <path d="M14 10V4a2 2 0 0 0-4 0v6"/>
+            <path d="M10 10.5V6a2 2 0 0 0-4 0v8"/>
+            <path d="M6 14v1a6 6 0 0 0 12 0v-3"/>
+          </svg>
+        </span>
+        TOUCH TO EXPERIENCE
+      </button>
+    </div>
+  </div>
+
   <!-- Background -->
   <div class="bg-layer"></div>
 
   <!-- Main Wrapper -->
-  <main class="main-wrapper">
+  <main class="main-wrapper" id="main-content" style="opacity:0;pointer-events:none;">
 
     <!-- Logo -->
     <div class="logo-wrap" id="logo-wrap">
