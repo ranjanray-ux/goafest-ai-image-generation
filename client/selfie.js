@@ -246,15 +246,18 @@ document.addEventListener("DOMContentLoaded", () => {
         "Finalizing high-quality avatar..."
       ];
 
-      let msgIndex = 0;
+      let msgIndex  = 0;
+      let stepIndex = 0;
       const loadingMsgEl = document.getElementById("loading-message");
 
       // Kick off first typewriter immediately
       if (loadingMsgEl) typewriter(loadingMsgEl, loadingMessages[0]);
 
       const intervalId = setInterval(() => {
-        msgIndex = (msgIndex + 1) % loadingMessages.length;
-        setLoadingStep(msgIndex);
+        // Messages cycle for variety; steps only advance forward, never reset
+        msgIndex  = (msgIndex + 1) % loadingMessages.length;
+        stepIndex = Math.min(stepIndex + 1, loadingMessages.length - 1);
+        setLoadingStep(stepIndex);
         if (loadingMsgEl) {
           loadingMsgEl.style.opacity = 0;
           setTimeout(() => {
