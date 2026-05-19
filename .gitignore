@@ -3,8 +3,5 @@
 .DS_Store
 ._*
 */.DS_Store
-client/card/
 client/downloads/
-*.jpg
-*.jpeg
 test_output.jpg
