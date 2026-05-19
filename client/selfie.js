@@ -1,3 +1,67 @@
+/* ── Video idle screensaver (30s inactivity) ── */
+(function initVideoIdle() {
+  const IDLE_MS  = 30000;
+  const overlay  = document.getElementById('selfie-video-overlay');
+  const vid      = document.getElementById('selfie-intro-video');
+  const btn      = document.getElementById('selfie-experience-btn');
+  if (!overlay || !vid || !btn) return;
+
+  // Idle countdown ring
+  const ring = document.createElement('div');
+  ring.className = 'idle-ring';
+  ring.innerHTML = '<svg viewBox="0 0 52 52" width="52" height="52"><circle class="track" cx="26" cy="26" r="22"/><circle class="fill" cx="26" cy="26" r="22"/></svg>';
+  document.body.appendChild(ring);
+  const ringFill  = ring.querySelector('.fill');
+  const CIRC      = 2 * Math.PI * 22;
+
+  function setRing(f) { ringFill.style.strokeDashoffset = CIRC * (1 - f); }
+
+  let idleTick = null;
+
+  function showVideo() {
+    const t = parseFloat(sessionStorage.getItem('goaVideoTime') || '0');
+    vid.currentTime = t;
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => overlay.classList.remove('hidden'));
+    vid.play();
+    ring.classList.remove('visible');
+    clearInterval(idleTick);
+  }
+
+  function hideVideo() {
+    sessionStorage.setItem('goaVideoTime', vid.currentTime);
+    vid.pause();
+    overlay.classList.add('hidden');
+    setTimeout(() => overlay.style.display = 'none', 700);
+    resetIdle();
+  }
+
+  function resetIdle() {
+    clearInterval(idleTick);
+    ring.classList.remove('visible');
+    setRing(0);
+    let elapsed = 0;
+    ring.classList.add('visible');
+    idleTick = setInterval(() => {
+      elapsed += 1000;
+      setRing(elapsed / IDLE_MS);
+      if (elapsed >= IDLE_MS) { clearInterval(idleTick); showVideo(); }
+    }, 1000);
+  }
+
+  resetIdle();
+
+  ['mousemove', 'mousedown', 'touchstart', 'keydown', 'scroll'].forEach(e => {
+    document.addEventListener(e, () => {
+      if (!overlay.classList.contains('hidden') || overlay.style.display === 'none') return;
+      resetIdle();
+    }, { passive: true });
+  });
+
+  btn.addEventListener('click', hideVideo);
+  btn.addEventListener('touchend', (e) => { e.preventDefault(); hideVideo(); });
+})();
+
 /* ── Loading screen interactions ── */
 function initLoadingInteractions() {
   const overlay  = document.getElementById('loading-screen');

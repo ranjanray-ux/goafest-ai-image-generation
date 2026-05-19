@@ -95,6 +95,11 @@ cards.forEach(card => {
     cards.forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
     clearIdleUI();
+    // Save video position so selfie page can resume from here
+    if (introVideo) {
+      sessionStorage.setItem('goaVideoTime', introVideo.currentTime);
+      introVideo.pause();
+    }
     const vibe = card.getAttribute('data-vibe');
     setTimeout(() => {
       window.location.href = `selfie.html?vibe=${vibe}`;

@@ -14,6 +14,16 @@
 
 <body>
 
+  <!-- Video Idle Overlay (screensaver after 30s inactivity) -->
+  <div id="selfie-video-overlay" class="video-overlay hidden" style="display:none;">
+    <video id="selfie-intro-video" class="intro-video" muted playsinline>
+      <source src="video/GoaFest.webm" type="video/webm">
+    </video>
+    <div class="video-overlay-ui">
+      <button id="selfie-experience-btn" class="experience-btn"></button>
+    </div>
+  </div>
+
   <!-- Background -->
   <div class="bg-layer bg2-layer"></div>
 
