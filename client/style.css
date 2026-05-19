@@ -203,10 +203,11 @@ body {
 }
 
 .vibe-text {
-  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+  font-size: clamp(1.8rem, 4.5vw, 3.6rem);
   font-weight: 900;
-  letter-spacing: -1px;
+  letter-spacing: 2px;
   line-height: 1;
+  white-space: nowrap;
   background: linear-gradient(90deg, #7B2FBE 0%, #1a73e8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
