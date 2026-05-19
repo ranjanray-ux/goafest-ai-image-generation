@@ -1,8 +1,8 @@
 /* ── Video overlay helpers (selfie page) ── */
 (function initVideoOverlay() {
   const overlay = document.getElementById('selfie-video-overlay');
-  const vid     = document.getElementById('selfie-intro-video');
-  const btn     = document.getElementById('selfie-experience-btn');
+  const vid = document.getElementById('selfie-intro-video');
+  const btn = document.getElementById('selfie-experience-btn');
   if (!overlay || !vid || !btn) return;
 
   function hideVideo() {
@@ -90,12 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initLoadingInteractions();
 
   // Page-level AI effects — cursor glow + parallax
-  const pageGlow  = document.getElementById('page-cursor-glow');
+  const pageGlow = document.getElementById('page-cursor-glow');
   const pageLayer = document.getElementById('page-parallax');
   document.addEventListener('mousemove', (e) => {
-    if (pageGlow)  { pageGlow.style.left = e.clientX + 'px'; pageGlow.style.top = e.clientY + 'px'; }
+    if (pageGlow) { pageGlow.style.left = e.clientX + 'px'; pageGlow.style.top = e.clientY + 'px'; }
     if (pageLayer) {
-      const dx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      const dx = (e.clientX / window.innerWidth - 0.5) * 2;
       const dy = (e.clientY / window.innerHeight - 0.5) * 2;
       pageLayer.style.transform = `translate(${dx * 16}px, ${dy * 12}px)`;
     }
