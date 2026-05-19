@@ -689,37 +689,30 @@ body {
 .replay-video-btn {
   position: fixed;
   bottom: 28px;
-  left: 28px;
+  right: 28px;
   z-index: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   background: linear-gradient(135deg, #7c3aed, #3b82f6);
   border: none;
   color: #fff;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(124, 58, 237, 0.5), 0 0 0 3px rgba(124,58,237,0.15);
   animation: replayPulse 2.5s ease-in-out infinite;
   transition: transform 0.15s, box-shadow 0.2s;
 }
 
-.replay-video-btn::before {
-  content: 'REPLAY VIDEO';
-}
-
 .replay-video-btn:hover {
-  transform: scale(1.06) translateY(-2px);
-  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.65), 0 0 0 4px rgba(124,58,237,0.2);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.65), 0 0 0 5px rgba(124,58,237,0.2);
 }
 
 .replay-video-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.95);
 }
 
 @keyframes replayPulse {
