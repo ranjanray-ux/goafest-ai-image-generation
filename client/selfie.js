@@ -1,9 +1,9 @@
 /* ── Video idle screensaver (30s inactivity) ── */
 (function initVideoIdle() {
-  const IDLE_MS  = 30000;
-  const overlay  = document.getElementById('selfie-video-overlay');
-  const vid      = document.getElementById('selfie-intro-video');
-  const btn      = document.getElementById('selfie-experience-btn');
+  const IDLE_MS = 60000;
+  const overlay = document.getElementById('selfie-video-overlay');
+  const vid = document.getElementById('selfie-intro-video');
+  const btn = document.getElementById('selfie-experience-btn');
   if (!overlay || !vid || !btn) return;
 
   // Idle countdown ring
@@ -11,8 +11,8 @@
   ring.className = 'idle-ring';
   ring.innerHTML = '<svg viewBox="0 0 52 52" width="52" height="52"><circle class="track" cx="26" cy="26" r="22"/><circle class="fill" cx="26" cy="26" r="22"/></svg>';
   document.body.appendChild(ring);
-  const ringFill  = ring.querySelector('.fill');
-  const CIRC      = 2 * Math.PI * 22;
+  const ringFill = ring.querySelector('.fill');
+  const CIRC = 2 * Math.PI * 22;
 
   function setRing(f) { ringFill.style.strokeDashoffset = CIRC * (1 - f); }
 
@@ -64,18 +64,18 @@
 
 /* ── Loading screen interactions ── */
 function initLoadingInteractions() {
-  const overlay  = document.getElementById('loading-screen');
-  const layer    = document.getElementById('parallax-layer');
-  const glow     = document.getElementById('cursor-glow');
+  const overlay = document.getElementById('loading-screen');
+  const layer = document.getElementById('parallax-layer');
+  const glow = document.getElementById('cursor-glow');
   if (!overlay) return;
 
   // Mouse parallax — particles follow cursor depth
   overlay.addEventListener('mousemove', (e) => {
     const { left, top, width, height } = overlay.getBoundingClientRect();
-    const dx = ((e.clientX - left) / width  - 0.5) * 2;
-    const dy = ((e.clientY - top)  / height - 0.5) * 2;
+    const dx = ((e.clientX - left) / width - 0.5) * 2;
+    const dy = ((e.clientY - top) / height - 0.5) * 2;
     if (layer) layer.style.transform = `translate(${dx * 14}px, ${dy * 10}px)`;
-    if (glow)  { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }
+    if (glow) { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }
   });
 
   overlay.addEventListener('mouseleave', () => {
@@ -87,7 +87,7 @@ function initLoadingInteractions() {
     const ripple = document.createElement('div');
     ripple.className = 'ai-ripple';
     ripple.style.left = e.clientX + 'px';
-    ripple.style.top  = e.clientY + 'px';
+    ripple.style.top = e.clientY + 'px';
     overlay.appendChild(ripple);
     setTimeout(() => ripple.remove(), 1000);
   });
@@ -113,7 +113,7 @@ function typewriter(el, text, speed) {
 function setLoadingStep(index) {
   document.querySelectorAll('#loading-screen .step-item').forEach((el, i) => {
     el.classList.remove('active', 'done');
-    if (i < index)      el.classList.add('done');
+    if (i < index) el.classList.add('done');
     else if (i === index) el.classList.add('active');
   });
 }
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const retakeBtn = document.getElementById("retake-btn");
   const generateBtn = document.getElementById("generate-btn");
   const backBtn = document.getElementById("back-btn");
-  
+
   const loadingScreen = document.getElementById("loading-screen");
   const resultScreen = document.getElementById("result-screen");
   const resultImage = document.getElementById("result-image");
@@ -182,30 +182,30 @@ document.addEventListener("DOMContentLoaded", () => {
       const wrapper = document.querySelector('.webcam-box');
       wrapper.style.transition = "background-color 0.1s";
       wrapper.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-      
+
       setTimeout(() => {
         wrapper.style.transition = "background-color 0.5s";
         wrapper.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
       }, 100);
-      
+
       // Draw current video frame to canvas
       const canvas = document.createElement('canvas');
       canvas.width = videoElement.videoWidth || 640;
       canvas.height = videoElement.videoHeight || 480;
       const ctx = canvas.getContext('2d');
-      
+
       // Mirror horizontally since front cameras are mirrored
       ctx.translate(canvas.width, 0);
       ctx.scale(-1, 1);
       ctx.drawImage(videoElement, 0, 0);
-      
+
       canvas.toBlob((blob) => {
         capturedBlob = blob;
       }, 'image/jpeg', 0.85);
 
       // Pause video to "capture" the frame visually
       videoElement.pause();
-      
+
       // Swap buttons
       captureBtn.style.display = 'none';
       const actionBtns = document.getElementById('action-btns');
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
       capturedBlob = null;
       cloudLink = null;
       isUploading = false;
-      
+
       // Swap buttons
       const actionBtns = document.getElementById('action-btns');
       if (actionBtns) actionBtns.style.display = 'none';
@@ -278,16 +278,16 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (fetchErr) {
           throw fetchErr;
         }
-        
+
         const data = await res.json();
-        
+
         clearInterval(intervalId);
         loadingScreen.style.display = 'none';
 
         if (data.success && data.imageUrl) {
           // Display the returned base64 image URL
           resultImage.src = data.imageUrl;
-          
+
           // Show result screen
           resultScreen.style.display = 'flex';
 
@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadingScreen.style.display = 'none';
         console.error("API Error:", err);
         alert("API Connection Error. Make sure your Node.js backend server is running!");
-        
+
         // Resume camera
         videoElement.play();
         capturedBlob = null;
@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isUploading) return;
     isUploading = true;
     console.log("Uploading generated avatar to cloud service in background...");
-    
+
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({ imageBase64: imageBase64 })
       });
-      
+
       const uploadData = await response.json();
       if (uploadData.success && uploadData.url) {
         cloudLink = uploadData.url;
@@ -381,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Preparing your QR code, please wait a brief moment...");
         return;
       }
-      
+
       // Open the Lead Capture modal
       leadModal.style.display = 'flex';
     });
@@ -399,7 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (leadForm) {
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const name = document.getElementById("lead-name").value;
       const email = document.getElementById("lead-email").value;
       const phone = document.getElementById("lead-phone").value;
@@ -457,7 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
       qrModal.style.display = 'none';
     });
   }
-  
+
   if (leadModal) {
     leadModal.addEventListener('click', (e) => {
       if (e.target === leadModal) {
